@@ -1,0 +1,1 @@
+# schooltrix-joomla-quickstart
