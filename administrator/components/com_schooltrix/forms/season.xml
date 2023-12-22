@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form addfieldprefix="Joomla\Component\schoolTrix\Administrator\Field">
+	<fieldset name="details">
+		<field
+			name="id"
+			type="text"
+			label="JGLOBAL_FIELD_ID_LABEL"
+			default="0"
+			readonly="true"
+			class="readonly"
+		/>
+
+		<field
+			name="season"
+			type="text"
+			label="SCHOOLTRIX_FIELD_SEASON"
+			required="true"
+		/>
+
+		<field
+			name="alias"
+			type="hidden"
+		/>
+
+		<field
+			name="start_date"
+			type="calendar"
+			label="SCHOOLTRIX_FIELD_START_DATE"
+			required="true"
+			default=""
+		/>
+
+		<field
+			name="end_date"
+			type="calendar"
+			label="SCHOOLTRIX_FIELD_END_DATE"
+			required="true"
+			default=""
+		/>
+	</fieldset>
+</form>
