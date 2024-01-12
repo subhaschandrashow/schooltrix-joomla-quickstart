@@ -1,0 +1,167 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "schooltrix",
+  "version": "4.0.0",
+  "description": "This file contains details of the assets used by Cassiopeia, the default Joomla 4 site template.",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "template.schooltrix.bootstrap",
+      "description": "Bootstrap for schooltrix template",
+      "type": "style",
+      "uri": "../plugins/bootstrap/css/bootstrap.min.css"
+    },
+    {
+      "name": "template.schooltrix.feather",
+      "description": "Feather for schooltrix template",
+      "type": "style",
+      "uri": "../plugins/feather/feather.css"
+    },
+    {
+      "name": "template.schooltrix.icons.flags",
+      "description": "Flags css for schooltrix template",
+      "type": "style",
+      "uri": "../plugins/icons/flags/flags.css"
+    },
+    {
+      "name": "template.schooltrix.fontawesome.main",
+      "description": "Fontawesome main css for schooltrix template",
+      "type": "style",
+      "uri": "../plugins/icons/fontawesome/css/fontawesome.min.css"
+    },
+    {
+      "name": "template.schooltrix.fontawesome.all",
+      "description": "Fontawesome main css for schooltrix template",
+      "type": "style",
+      "uri": "../plugins/icons/fontawesome/css/all.min.css"
+    },
+    {
+      "name": "template.schooltrix.ltr",
+      "description": "The css file to be used when the site is left to right (LTR).",
+      "type": "style",
+      "uri": "style.css",
+      "dependencies": [
+        "fontawesome"
+      ]
+    },
+    {
+      "name": "template.schooltrix.rtl",
+      "description": "The css file to be used when the site is right to left (RTL).",
+      "type": "style",
+      "uri": "template-rtl.min.css",
+      "dependencies": [
+        "fontawesome"
+      ]
+    },
+    {
+      "name": "template.offline",
+      "description": "The css file to be used when the site is offline and offline.php is being used.",
+      "type": "style",
+      "uri": "offline.css"
+    },
+    {
+      "name": "template.active.language",
+      "description": "An asset to allow language specific css, eg 'language/[lang-CODE]/[lang-CODE].css', to use it as a dependency to the active template",
+      "type": "style",
+      "uri": "",
+      "class": "LangActiveAssetItem",
+      "dependencies": [
+        "template.active"
+      ]
+    },
+    {
+      "name": "template.user",
+      "description": "A file where a user can add their own css.",
+      "type": "style",
+      "uri": "user.css",
+      "weight": 500,
+      "dependencies": [
+        "template.active",
+        "template.active.language"
+      ]
+    },
+    {
+      "name": "template.schooltrix",
+      "description": "The file containing the javascript for this template.",
+      "type": "script",
+      "uri": "template.js",
+      "attributes" : {
+        "defer": true
+      },
+      "dependencies": [
+        "core"
+      ]
+    },
+    {
+      "name": "template.active",
+      "description": "A dummy asset to allow extensions to use it as a dependency to the active template.",
+      "type": "script",
+      "uri": "",
+      "dependencies": [
+        "template.schooltrix"
+      ]
+    },
+    {
+      "name": "template.user",
+      "description": "The name of a file where a user can add their own javascript",
+      "type": "script",
+      "uri":  "user.js",
+      "dependencies": [
+        "template.active"
+      ]
+    },
+    {
+      "name": "template.jquery",
+      "description": "jquery of schooltrix",
+      "type": "script",
+      "uri":  "jquery-3.6.0.min.js",
+      "dependencies": [
+        "template.active"
+      ]
+    },
+    {
+      "name": "template.script",
+      "description": "jquery of schooltrix",
+      "type": "script",
+      "uri":  "script.js"
+    },
+    {
+      "name": "template.bootstrapjs",
+      "description": "bootstrap js of schooltrix",
+      "type": "script",
+      "uri": "../plugins/bootstrap/js/bootstrap.bundle.min.js"
+    },
+    {
+      "name": "template.featherjs",
+      "description": "featherjs of schooltrix",
+      "type": "script",
+      "uri":  "feather.min.js"
+    },
+    {
+      "name": "template.schooltrix.ltr",
+      "type": "preset",
+      "dependencies": [
+        "template.schooltrix.ltr#style",
+        "template.schooltrix#script"
+      ]
+    },
+    {
+      "name": "template.schooltrix.rtl",
+      "type": "preset",
+      "dependencies": [
+        "template.schooltrix.rtl#style",
+        "template.schooltrix#script"
+      ]
+    },
+    {
+      "name": "searchtools",
+      "type": "style",
+      "uri": "system/searchtools/searchtools.min.css"
+    },
+    {
+      "name": "fontawesome",
+      "type": "style",
+      "uri": "system/joomla-fontawesome.min.css"
+    }
+  ]
+}

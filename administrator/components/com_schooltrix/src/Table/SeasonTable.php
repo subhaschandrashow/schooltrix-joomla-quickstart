@@ -221,12 +221,6 @@ class SeasonTable extends Table implements VersionableTableInterface
 
             // Store the new row
             parent::store($updateNulls);
-
-            // Need to reorder ?
-            if ($oldrow->state >= 0 && ($this->state < 0 || $oldrow->catid != $this->catid)) {
-                // Reorder the oldrow
-                $this->reorder($this->_db->quoteName('catid') . ' = ' . ((int) $oldrow->catid) . ' AND ' . $this->_db->quoteName('state') . ' >= 0');
-            }
         }
 
         return \count($this->getErrors()) == 0;
