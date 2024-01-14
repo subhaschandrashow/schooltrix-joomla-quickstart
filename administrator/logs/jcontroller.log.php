@@ -39,3 +39,7 @@
 2024-01-12T14:00:03+00:00	INFO ::1	controller	Releasing edit ID com_menus.edit.item.101 Array ( ) 
 2024-01-12T14:00:17+00:00	INFO ::1	controller	Holding edit ID com_menus.edit.item.101 Array (     [0] => 101 ) 
 2024-01-12T14:00:55+00:00	INFO ::1	controller	Releasing edit ID com_menus.edit.item.101 Array ( ) 
+2024-01-14T18:07:18+00:00	INFO ::1	controller	Holding edit ID com_menus.edit.item.120 Array (     [0] => 120 ) 
+2024-01-14T18:07:25+00:00	INFO ::1	controller	Releasing edit ID com_menus.edit.item.120 Array ( ) 
+2024-01-14T18:10:01+00:00	INFO ::1	controller	Holding edit ID com_menus.edit.item.123 Array (     [0] => 123 ) 
+2024-01-14T18:10:08+00:00	INFO ::1	controller	Releasing edit ID com_menus.edit.item.123 Array ( ) 

@@ -25,41 +25,54 @@ if ($tagId = $params->get('tag_id', '')) {
 
 // The menu class is deprecated. Use mod-menu instead
 ?>
-<?php foreach ($list as $i => &$item) {
-    $itemParams = $item->getParams();
-    $class      = 'submenu item-' . $item->id;
+<?php
+    foreach ($list as $i => &$item)
+    {
+        $itemParams = $item->getParams();
+        $class      = 'item-' . $item->id;
 
-    if ($item->id == $default_id) {
-        $class .= ' default';
-    }
-
-    if ($item->id == $active_id || ($item->type === 'alias' && $itemParams->get('aliasoptions') == $active_id)) {
-        $class .= ' current';
-    }
-
-    if (in_array($item->id, $path)) {
-        $class .= ' active';
-    } elseif ($item->type === 'alias') {
-        $aliasToId = $itemParams->get('aliasoptions');
-
-        if (count($path) > 0 && $aliasToId == $path[count($path) - 1]) {
-            $class .= ' active';
-        } elseif (in_array($aliasToId, $path)) {
-            $class .= ' alias-parent-active';
+        if ($item->type === 'separator')
+        {
+            $class .= " submenu";
         }
-    }
 
-    if ($item->type === 'separator') {
-        $class .= ' divider';
-    }
+        if ($item->id == $default_id) {
+            //$class .= ' default';
+        }
 
-    if ($item->deeper) {
-        $class .= ' deeper';
-    }
+        if ($item->id == $active_id || ($item->type === 'alias' && $itemParams->get('aliasoptions') == $active_id)) {
+            $class .= ' current';
+        }
 
-    if ($item->parent) {
-        $class .= ' parent';
-    }
+        if (in_array($item->id, $path))
+        {
+            //$class .= ' active';
+        }
+        elseif ($item->type === 'alias')
+        {
+            $aliasToId = $itemParams->get('aliasoptions');
+
+            if (count($path) > 0 && $aliasToId == $path[count($path) - 1]) {
+                //$class .= ' active';
+            } elseif (in_array($aliasToId, $path)) {
+                $class .= ' alias-parent-active';
+            }
+        }
+
+        if ($item->type === 'separator')
+        {
+            $class .= ' divider';
+        }
+
+        if ($item->deeper)
+        {
+            $class .= ' deeper';
+        }
+
+        if ($item->parent)
+        {
+            $class .= ' parent';
+        }
 
     echo '<li class="' . $class . '">';
 
@@ -78,7 +91,15 @@ if ($tagId = $params->get('tag_id', '')) {
 
     // The next item is deeper.
     if ($item->deeper) {
-        echo '<ul class="mod-menu__sub list-unstyled small">';
+        if (in_array($item->id, $path))
+        {
+            echo '<ul style="display:block">';
+        }
+        else
+        {
+            echo '<ul>';
+        }
+        
     } elseif ($item->shallower) {
         // The next item is shallower.
         echo '</li>';

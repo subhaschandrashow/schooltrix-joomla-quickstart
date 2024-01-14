@@ -114,10 +114,7 @@
       "name": "template.jquery",
       "description": "jquery of schooltrix",
       "type": "script",
-      "uri":  "jquery-3.6.0.min.js",
-      "dependencies": [
-        "template.active"
-      ]
+      "uri":  "jquery-3.6.0.min.js"
     },
     {
       "name": "template.script",

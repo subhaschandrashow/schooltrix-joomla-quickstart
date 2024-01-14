@@ -1,4 +1,4 @@
-(function($){"use strict";var $wrapper=$('.main-wrapper');var $pageWrapper=$('.page-wrapper');var $slimScrolls=$('.slimscroll');var Sidemenu=function(){this.$menuItem=$('#sidebar-menu a');};function init(){var $this=Sidemenu;$('#sidebar-menu a').on('click',function(e){if($(this).parent().hasClass('submenu')){e.preventDefault();}
+jQuery(function() {(function($){"use strict";var $wrapper=$('.main-wrapper');var $pageWrapper=$('.page-wrapper');var $slimScrolls=$('.slimscroll');var Sidemenu=function(){this.$menuItem=$('#sidebar-menu a');};function init(){var $this=Sidemenu;$('#sidebar-menu a').on('click',function(e){if($(this).parent().hasClass('submenu')){e.preventDefault();}
 if(!$(this).hasClass('subdrop')){$('ul',$(this).parents('ul:first')).slideUp(350);$('a',$(this).parents('ul:first')).removeClass('subdrop');$(this).next('ul').slideDown(350);$(this).addClass('subdrop');}else if($(this).hasClass('subdrop')){$(this).removeClass('subdrop');$(this).next('ul').slideUp(350);}});$('#sidebar-menu ul li.submenu a.active').parents('li:last').children('a:first').addClass('active').trigger('click');}
 init();$('body').append('<div class="sidebar-overlay"></div>');$(document).on('click','#mobile_btn',function(){$wrapper.toggleClass('slide-nav');$('.sidebar-overlay').toggleClass('opened');$('html').addClass('menu-opened');return false;});if($('.toggle-password').length>0){$(document).on('click','.toggle-password',function(){$(this).toggleClass("feather-eye feather-eye-off");var input=$(".pass-input");if(input.attr("type")=="password"){input.attr("type","text");}else{input.attr("type","password");}});}
 if($('.reg-toggle-password').length>0){$(document).on('click','.reg-toggle-password',function(){$(this).toggleClass("feather-eye feather-eye-off");var input=$(".pass-confirm");if(input.attr("type")=="password"){input.attr("type","text");}else{input.attr("type","password");}});}
@@ -69,4 +69,4 @@ $(".add-table-items").on('click','.remove-btn',function(){$(this).closest('.add-
 '<a href="#" class="copy-btn me-2"><i class="fe fe-copy"></i></a>'+
 '<a href="javascript:void(0);" class="remove-btn"><i class="fe fe-trash-2"></i></a>'+
 '</td>'+
-'</tr>';$(".add-table-items").append(experiencecontent);return false;});feather.replace();})(jQuery);
+'</tr>';$(".add-table-items").append(experiencecontent);return false;});feather.replace();})(jQuery)});
