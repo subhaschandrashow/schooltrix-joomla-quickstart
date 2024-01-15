@@ -42,7 +42,7 @@ elseif ($item->menu_image) {
     }
 }
 ?>
-<a href="javascript:#" <?php if ($item->parent == "1") { ?> class = "active subdrop" <?php } ?>>
+<a href="javascript:#">
 <?php echo $linktype; ?>
 <span class="menu-arrow"></span>
 </a>

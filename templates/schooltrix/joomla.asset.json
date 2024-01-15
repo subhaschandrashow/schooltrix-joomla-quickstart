@@ -135,6 +135,12 @@
       "uri":  "feather.min.js"
     },
     {
+      "name": "template.slimscroll",
+      "description": "slimsroll of schooltrix",
+      "type": "script",
+      "uri":  "../plugins/slimscroll/jquery.slimscroll.min.js"
+    },
+    {
       "name": "template.schooltrix.ltr",
       "type": "preset",
       "dependencies": [
