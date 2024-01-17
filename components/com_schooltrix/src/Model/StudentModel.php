@@ -2,7 +2,7 @@
 
 /**
  * @package     Joomla.Site
- * @subpackage  com_content
+ * @subpackage  com_schooltrix
  *
  * @copyright   (C) 2009 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -16,6 +16,7 @@ use Joomla\CMS\Helper\TagsHelper;
 use Joomla\CMS\Language\Associations;
 use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\Object\CMSObject;
+use Joomla\CMS\MVC\Model\FormModel;
 use Joomla\CMS\Table\Table;
 use Joomla\Database\ParameterType;
 use Joomla\Registry\Registry;
@@ -30,7 +31,7 @@ use Joomla\Utilities\ArrayHelper;
  *
  * @since  1.5
  */
-class StudentModel extends \Joomla\Component\Schooltrix\Administrator\Model\StudentModel
+class StudentModel extends FormModel
 {
     /**
      * Model typeAlias string. Used for version history.
@@ -76,15 +77,11 @@ class StudentModel extends \Joomla\Component\Schooltrix\Administrator\Model\Stud
         // Check for a table object error.
         if ($return === false && $table->getError()) {
             $this->setError($table->getError());
-
             return false;
         }
 
         $properties = $table->getProperties(1);
         $value      = ArrayHelper::toObject($properties, CMSObject::class);
-
-        // Convert attrib field to Registry.
-        $value->params = new Registry($value->attribs);
 
         // Compute selected asset permissions.
         $user   = $this->getCurrentUser();
@@ -102,62 +99,6 @@ class StudentModel extends \Joomla\Component\Schooltrix\Administrator\Model\Stud
             }
         }
 
-        // Check edit state permission.
-        if ($itemId) {
-            // Existing item
-            $value->params->set('access-change', $user->authorise('core.edit.state', $asset));
-        } else {
-            // New item.
-            $catId = (int) $this->getState('article.catid');
-
-            if ($catId) {
-                $value->params->set('access-change', $user->authorise('core.edit.state', 'com_content.category.' . $catId));
-                $value->catid = $catId;
-            } else {
-                $value->params->set('access-change', $user->authorise('core.edit.state', 'com_content'));
-            }
-        }
-
-        $value->articletext = $value->introtext;
-
-        if (!empty($value->fulltext)) {
-            $value->articletext .= '<hr id="system-readmore">' . $value->fulltext;
-        }
-
-        // Convert the metadata field to an array.
-        $registry        = new Registry($value->metadata);
-        $value->metadata = $registry->toArray();
-
-        if ($itemId) {
-            $value->tags = new TagsHelper();
-            $value->tags->getTagIds($value->id, 'com_content.article');
-            $value->metadata['tags'] = $value->tags;
-
-            $value->featured_up   = null;
-            $value->featured_down = null;
-
-            if ($value->featured) {
-                // Get featured dates.
-                $db    = $this->getDatabase();
-                $query = $db->getQuery(true)
-                    ->select(
-                        [
-                            $db->quoteName('featured_up'),
-                            $db->quoteName('featured_down'),
-                        ]
-                    )
-                    ->from($db->quoteName('#__content_frontpage'))
-                    ->where($db->quoteName('content_id') . ' = :id')
-                    ->bind(':id', $value->id, ParameterType::INTEGER);
-
-                $featured = $db->setQuery($query)->loadObject();
-
-                if ($featured) {
-                    $value->featured_up   = $featured->featured_up;
-                    $value->featured_down = $featured->featured_down;
-                }
-            }
-        }
 
         return $value;
     }
@@ -216,37 +157,13 @@ class StudentModel extends \Joomla\Component\Schooltrix\Administrator\Model\Stud
      */
     public function getForm($data = [], $loadData = true)
     {
-        $form = parent::getForm($data, $loadData);
+        $form = $this->loadForm('com_schooltrix.student', 'student', ['control' => 'jform', 'load_data' => $loadData]);
 
         if (empty($form)) {
             return false;
         }
 
-        $app  = Factory::getApplication();
-        $user = $app->getIdentity();
-
-        // On edit article, we get ID of article from article.id state, but on save, we use data from input
-        $id = (int) $this->getState('student.id', $app->getInput()->getInt('a_id'));
-
-        // Existing record. We can't edit the category in frontend if not edit.state.
-        if ($id > 0 && !$user->authorise('core.edit.state', 'com_schooltrix.student.' . $id)) {
-            $form->setFieldAttribute('catid', 'readonly', 'true');
-            $form->setFieldAttribute('catid', 'required', 'false');
-            $form->setFieldAttribute('catid', 'filter', 'unset');
-        }
-
-        // Prevent messing with article language and category when editing existing article with associations
-        if ($this->getState('article.id') && Associations::isEnabled()) {
-            $associations = Associations::getAssociations('com_content', '#__content', 'com_content.item', $id);
-
-            // Make fields read only
-            if (!empty($associations)) {
-                $form->setFieldAttribute('language', 'readonly', 'true');
-                $form->setFieldAttribute('catid', 'readonly', 'true');
-                $form->setFieldAttribute('language', 'filter', 'unset');
-                $form->setFieldAttribute('catid', 'filter', 'unset');
-            }
-        }
+      
 
         return $form;
     }
@@ -264,37 +181,6 @@ class StudentModel extends \Joomla\Component\Schooltrix\Administrator\Model\Stud
      */
     protected function preprocessForm(Form $form, $data, $group = 'content')
     {
-        $params = $this->getState()->get('params');
-
-        if ($params && $params->get('enable_category') == 1 && $params->get('catid')) {
-            $form->setFieldAttribute('catid', 'default', $params->get('catid'));
-            $form->setFieldAttribute('catid', 'readonly', 'true');
-
-            if (Multilanguage::isEnabled()) {
-                $categoryId = (int) $params->get('catid');
-
-                $db    = $this->getDatabase();
-                $query = $db->getQuery(true)
-                    ->select($db->quoteName('language'))
-                    ->from($db->quoteName('#__categories'))
-                    ->where($db->quoteName('id') . ' = :categoryId')
-                    ->bind(':categoryId', $categoryId, ParameterType::INTEGER);
-                $db->setQuery($query);
-
-                $result = $db->loadResult();
-
-                if ($result != '*') {
-                    $form->setFieldAttribute('language', 'readonly', 'true');
-                    $form->setFieldAttribute('language', 'default', $result);
-                }
-            }
-        }
-
-        if (!Multilanguage::isEnabled()) {
-            $form->setFieldAttribute('language', 'type', 'hidden');
-            $form->setFieldAttribute('language', 'default', '*');
-        }
-
         parent::preprocessForm($form, $data, $group);
     }
 

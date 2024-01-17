@@ -8,12 +8,14 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\Component\schooltrix\Administrator\Model;
+namespace Joomla\Component\Schooltrix\Administrator\Model;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\AdminModel;
+use Joomla\CMS\MVC\Model\WorkflowBehaviorTrait;
+use Joomla\CMS\MVC\Model\WorkflowModelInterface;
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Table\TableInterface;
 use Joomla\CMS\Versioning\VersionableModelTrait;
@@ -29,7 +31,7 @@ use Joomla\Database\ParameterType;
  *
  * @since  1.6
  */
-class StudentModel extends AdminModel
+class StudentModel extends AdminModel implements WorkflowModelInterface
 {
     use VersionableModelTrait;
 
@@ -47,7 +49,7 @@ class StudentModel extends AdminModel
      * @var    string
      * @since  3.2
      */
-    public $typeAlias = 'com_schooltrix.season';
+    public $typeAlias = 'com_schooltrix.student';
 
     /**
      * Batch copy/move command. If set to false, the batch copy/move command is not supported
@@ -137,7 +139,7 @@ class StudentModel extends AdminModel
     public function getForm($data = [], $loadData = true)
     {
         // Get the form.
-        $form = $this->loadForm('com_schooltrix.season', 'season', ['control' => 'jform', 'load_data' => $loadData]);
+        $form = $this->loadForm('com_schooltrix.student', 'student', ['control' => 'jform', 'load_data' => $loadData]);
 
         if (empty($form)) {
             return false;
@@ -164,7 +166,7 @@ class StudentModel extends AdminModel
             $data = $this->getItem();
         }
 
-        $this->preprocessData('com_schooltrix.season', $data);
+        $this->preprocessData('com_schooltrix.student', $data);
 
         return $data;
     }
