@@ -34,6 +34,12 @@ $params = $this->state->get('params');
 //     $params->set('show_urls_images_frontend', '0');
 // }
 ?>
+<div class="page-header">
+    <h1>
+        Add/Edit Admission
+    </h1>
+</div>
+
 <form action="<?php echo Route::_('index.php?option=com_schooltrix&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate form-vertical">
     <?php echo LayoutHelper::render('joomla.edit.title_alias', $this); ?>
     
@@ -159,6 +165,79 @@ $params = $this->state->get('params');
                 <?php echo $this->form->getLabel('father_occupation'); ?>
                 <?php echo $this->form->getInput('father_occupation'); ?>
             </div>
+        </div>
+
+        <div class="row">
+            <legend>Permanent Address</legend>
+            <div class="col-lg-4">
+                <?php echo $this->form->getLabel('address1_country'); ?>
+                <?php echo $this->form->getInput('address1_country'); ?>
+            </div>
+            <div class="col-lg-4">
+                <?php echo $this->form->getLabel('address1_state'); ?>
+                <?php echo $this->form->getInput('address1_state'); ?>
+            </div>
+            <div class="col-lg-4">
+                <?php echo $this->form->getLabel('address1_district'); ?>
+                <?php echo $this->form->getInput('address1_district'); ?>
+            </div>
+            <div class="col-lg-4">
+                <?php echo $this->form->getLabel('address1_pincode'); ?>
+                <?php echo $this->form->getInput('address1_pincode'); ?>
+            </div>
+            <div class="col-lg-4">
+                <?php echo $this->form->getLabel('address1_details'); ?>
+                <?php echo $this->form->getInput('address1_details'); ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <legend>Present Address</legend>
+            <div class="col-lg-4">
+                <?php echo $this->form->getLabel('address2_country'); ?>
+                <?php echo $this->form->getInput('address2_country'); ?>
+            </div>
+            <div class="col-lg-4">
+                <?php echo $this->form->getLabel('address2_state'); ?>
+                <?php echo $this->form->getInput('address2_state'); ?>
+            </div>
+            <div class="col-lg-4">
+                <?php echo $this->form->getLabel('address2_district'); ?>
+                <?php echo $this->form->getInput('address2_district'); ?>
+            </div>
+            <div class="col-lg-4">
+                <?php echo $this->form->getLabel('address2_pincode'); ?>
+                <?php echo $this->form->getInput('address2_pincode'); ?>
+            </div>
+            <div class="col-lg-4">
+                <?php echo $this->form->getLabel('address2_details'); ?>
+                <?php echo $this->form->getInput('address2_details'); ?>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <legend>Payment Status</legend>
+            <div class="col-lg-4">
+                <?php echo $this->form->getLabel('payment_status'); ?>
+                <?php echo $this->form->getInput('payment_status'); ?>
+            </div>
+        </div>
+
+        <div class="mt-2">
+            <button type="button" class="btn btn-primary" data-submit-task="student.apply">
+                <span class="icon-check" aria-hidden="true"></span>
+                <?php echo Text::_('JSAVE'); ?>
+            </button>
+            <button type="button" class="btn btn-primary" data-submit-task="student.save">
+                <span class="icon-check" aria-hidden="true"></span>
+                <?php echo Text::_('JSAVEANDCLOSE'); ?>
+            </button>
+            
+            <button type="button" class="btn btn-danger" data-submit-task="student.cancel">
+                <span class="icon-times" aria-hidden="true"></span>
+                <?php echo Text::_('JCANCEL'); ?>
+            </button>
+            
         </div>
     </div>
 </form>

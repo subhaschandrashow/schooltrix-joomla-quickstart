@@ -271,5 +271,117 @@
 
 			
 		</fieldset>
+
+		<fieldset name="address1" label="COM_CONTENT_FIELD_URLS_OPTIONS">
+			<field
+				name="address1_country"
+				type="list"
+				label="COM_SCHOOLTRIX_ADDRESS1_COUNTRY_LABEL"
+				default="0"
+				validate="options"
+				>
+				<option value="">COM_SCHOOLTRIX_ADDRESS1_COUNTRY_SELECT</option>
+				<option value="1">India</option>
+			</field>
+
+			<field
+				name="address1_state"
+				type="list"
+				label="COM_SCHOOLTRIX_ADDRESS1_STATE_LABEL"
+				default="0"
+				validate="options"
+				>
+				<option value="">COM_SCHOOLTRIX_ADDRESS1_STATE_SELECT</option>
+				<option value="1">West Bengal</option>
+			</field>
+
+			<field
+				name="address1_district"
+				type="list"
+				label="COM_SCHOOLTRIX_ADDRESS1_DISTRICT_LABEL"
+				default="0"
+				validate="options"
+				>
+				<option value="">COM_SCHOOLTRIX_ADDRESS1_DISTRICT_SELECT</option>
+				<option value="1">Howrah</option>
+			</field>
+
+			<field
+				name="address1_pincode"
+				type="text"
+				label="COM_SCHOOLTRIX_ADDRESS1_PINCODE_LABEL"
+				default=""
+			/>
+
+			<field
+				name="address1_details"
+				type="textarea"
+				label="COM_SCHOOLTRIX_ADDRESS1_DETAILS_LABEL"
+				default=""
+			/>
+		</fieldset>
+
+		<fieldset name="address2" label="COM_CONTENT_FIELD_URLS_OPTIONS">
+			<field
+				name="address2_country"
+				type="list"
+				label="COM_SCHOOLTRIX_ADDRESS2_COUNTRY_LABEL"
+				default="0"
+				validate="options"
+				>
+				<option value="">COM_SCHOOLTRIX_ADDRESS2_COUNTRY_SELECT</option>
+				<option value="1">India</option>
+			</field>
+
+			<field
+				name="address2_state"
+				type="list"
+				label="COM_SCHOOLTRIX_ADDRESS2_STATE_LABEL"
+				default="0"
+				validate="options"
+				>
+				<option value="">COM_SCHOOLTRIX_ADDRESS2_STATE_SELECT</option>
+				<option value="1">West Bengal</option>
+			</field>
+
+			<field
+				name="address2_district"
+				type="list"
+				label="COM_SCHOOLTRIX_ADDRESS2_DISTRICT_LABEL"
+				default="0"
+				validate="options"
+				>
+				<option value="">COM_SCHOOLTRIX_ADDRESS2_DISTRICT_SELECT</option>
+				<option value="1">Howrah</option>
+			</field>
+
+			<field
+				name="address2_pincode"
+				type="text"
+				label="COM_SCHOOLTRIX_ADDRESS2_PINCODE_LABEL"
+				default=""
+			/>
+
+			<field
+				name="address2_details"
+				type="textarea"
+				label="COM_SCHOOLTRIX_ADDRESS2_DETAILS_LABEL"
+				default=""
+			/>
+		</fieldset>
+		<fieldset name="payment" label="COM_CONTENT_FIELD_URLS_OPTIONS">
+			<field
+				name="payment_status"
+				type="list"
+				label="COM_SCHOOLTRIX_PAYMENT_STATUS_LABEL"
+				default="0"
+				validate="options"
+				>
+				<option value="">COM_SCHOOLTRIX_PAYMENT_STATUS_SELECT</option>
+				<option value="1">COM_SCHOOLTRIX_PAYMENT_STATUS_FULL_PAID</option>
+				<option value="2">COM_SCHOOLTRIX_PAYMENT_STATUS_PART_PAID</option>
+				<option value="3">COM_SCHOOLTRIX_PAYMENT_STATUS_NOT_PAID</option>
+			</field>
+		</fieldset>
 	</fields>
 </form>
