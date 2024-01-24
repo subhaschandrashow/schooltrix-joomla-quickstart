@@ -1,0 +1,17 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_schooltrix",
+  "version": "1.0.0",
+  "description": "Joomla CMS",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "com_schooltrix.student-edit",
+      "type": "script",
+      "uri": "com_schooltrix/student-edit.js",
+      "dependencies": [
+        "core"
+      ]
+    }
+  ]
+}

@@ -88,18 +88,6 @@ class StudentModel extends FormModel
         $userId = $user->get('id');
         $asset  = 'com_schooltrix.student.' . $value->id;
 
-        // Check general edit permission first.
-        if ($user->authorise('core.edit', $asset)) {
-            $value->params->set('access-edit', true);
-        } elseif (!empty($userId) && $user->authorise('core.edit.own', $asset)) {
-            // Now check if edit.own is available.
-            // Check for a valid user and that they are the owner.
-            if ($userId == $value->created_by) {
-                $value->params->set('access-edit', true);
-            }
-        }
-
-
         return $value;
     }
 
@@ -126,21 +114,6 @@ class StudentModel extends FormModel
      */
     public function save($data)
     {
-        // Associations are not edited in frontend ATM so we have to inherit them
-        if (
-            Associations::isEnabled() && !empty($data['id'])
-            && $associations = Associations::getAssociations('com_content', '#__content', 'com_content.item', $data['id'])
-        ) {
-            foreach ($associations as $tag => $associated) {
-                $associations[$tag] = (int) $associated->id;
-            }
-
-            $data['associations'] = $associations;
-        }
-
-        if (!Multilanguage::isEnabled()) {
-            $data['language'] = '*';
-        }
 
         return parent::save($data);
     }

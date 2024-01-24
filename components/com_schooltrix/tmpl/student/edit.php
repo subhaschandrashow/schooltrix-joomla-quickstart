@@ -18,9 +18,9 @@ use Joomla\CMS\Router\Route;
 
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
-//$wa->useScript('keepalive')
-  //  ->useScript('form.validate')
-    //->useScript('com_content.form-edit');
+$wa->useScript('keepalive')
+    ->useScript('form.validate')
+    ->useScript('com_schooltrix.student-edit');
 
 $this->tab_name = 'com-content-form';
 $this->ignore_fieldsets = ['image-intro', 'image-full', 'jmetadata', 'item_associations'];
@@ -240,5 +240,9 @@ $params = $this->state->get('params');
             
         </div>
     </div>
+
+    <input type="hidden" name="task" value="">
+    <input type="hidden" name="return" value="<?php echo $this->return_page; ?>">
+    <?php echo HTMLHelper::_('form.token'); ?>
 </form>
 
